@@ -329,3 +329,10 @@ svg{
 .three::after {
     transition: all 0.5s linear;
 }
+
+body {
+    background-image: url('19366.jpg');
+    background-size: cover; /* Ensures the image covers the entire background */
+    background-repeat: no-repeat; /* Prevents the image from repeating */
+    background-position: center; /* Centers the image */
+}
