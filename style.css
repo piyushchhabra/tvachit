@@ -310,7 +310,6 @@ svg{
     background-color:#1e183a;
     border-radius: 0;
     scale: 1.1;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .btn::after{
@@ -345,9 +344,11 @@ body {
     flex-direction: column;
     align-items: center; /* Vertically align items */
 }
+
 @media (max-width: 640px) {
     #hero-cta {
         margin-left: 1rem;
         margin-right: 2rem;
+        margin-top: 2rem;
     }
 }
