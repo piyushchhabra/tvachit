@@ -223,8 +223,10 @@ svg{
             font-weight: 300;
             text-transform: uppercase;
         }
-    
-     
+
+        #hero-cta {
+            margin-top: 3rem;
+        }
     }
      
     @media (min-width: 1024px){
@@ -294,7 +296,7 @@ svg{
 
 .btn {
     padding: .5em .5em;
-    background-color: #0ebac5;
+    background-color: #53aded;
     border: 1px solid #000;
     user-select: none;
     cursor: pointer;
@@ -308,11 +310,12 @@ svg{
     background-color:#1e183a;
     border-radius: 0;
     scale: 1.1;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
 }
 
 .btn::after{
     content: '';
-    background: #0ebac5;
+    background: #53aded;
     width: 0;
     height: 100%;
     position: absolute;
@@ -335,4 +338,16 @@ body {
     background-size: cover; /* Ensures the image covers the entire background */
     background-repeat: no-repeat; /* Prevents the image from repeating */
     background-position: center; /* Centers the image */
+}
+
+#hero-left {
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Vertically align items */
+}
+@media (max-width: 640px) {
+    #hero-cta {
+        margin-left: 1rem;
+        margin-right: 2rem;
+    }
 }
