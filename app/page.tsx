@@ -265,16 +265,23 @@ export default function Home() {
                     <span>Open Monday to Saturday, 9:00 AM - 7:00 PM</span>
                   </li>
                   <li className="flex items-center gap-2">
-                    <div className="flex h-8 w-10 items-center justify-center rounded-full bg-teal-100">
+                    <div className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-100">
                       <MapPin className="h-4 w-4 text-teal-600" />
                     </div>
-                    <span> 17/18, 1st Floor, Nityanand Apartment, Above shrinathji courier, Anand Baug Society, Tarsali, Vadodara, Gujarat</span>
+                    <a 
+                        href="https://maps.app.goo.gl/6z32WBDE3YrCv6m69" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="text-black hover:text-teal-600 hover:underline"
+                    >
+                        View Location on Google Maps
+                    </a>
                   </li>
                   <li className="flex items-center gap-2">
                     <div className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-100">
                       <Phone className="h-4 w-4 text-teal-600" />
                     </div>
-                    <span>+91 98765 43210</span>
+                    <a href="tel:+916352717046" className="text-black hover:text-teal-600 hover:underline">+91 63527 17046</a>
                   </li>
                   <li className="flex items-center gap-2">
                     <div className="flex h-8 w-8 items-center justify-center rounded-full bg-teal-100">
