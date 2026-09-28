@@ -6,8 +6,24 @@ const nextConfig = {
   typescript: {
     ignoreBuildErrors: true,
   },
-  images: {
-    unoptimized: true,
+  async redirects() {
+    return [
+      {
+        source: "/blog/acne-treatment-vadodara",
+        destination: "/blog/acne-treatment",
+        permanent: true,
+      },
+      {
+        source: "/blog/hair-fall-treatment-vadodara",
+        destination: "/blog/hair-fall-treatment",
+        permanent: true,
+      },
+      {
+        source: "/blog/pigmentation-treatment-vadodara",
+        destination: "/blog/pigmentation-treatment",
+        permanent: true,
+      },
+    ]
   },
 }
 

@@ -1,45 +1,81 @@
 import type { Metadata } from "next";
+import { Inter } from "next/font/google";
+
+import { JsonLd } from "@/components/json-ld";
+import { SiteFooter } from "@/components/site-footer";
+import { SiteHeader } from "@/components/site-header";
+import { getClinicJsonLd, ogImage, siteConfig } from "@/lib/site";
+
 import "./globals.css";
-import Script from "next/script";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
-  title: "Best Dermatologist in Vadodara | Skin & Hair Treatment Center",
+  title: {
+    default:
+      "Best Dermatologist in Vadodara | Tvachit Skin & Hair Clinic",
+    template: "%s | Tvachit Clinic",
+  },
   description:
-    "Expert dermatologist in Vadodara offering advanced skin care and hair loss treatments. Book consultation with the best skin specialist in Vadodara for personalized solutions.",
-  keywords:
-    "dermatologist in vadodara, skin specialist vadodara, best dermatologist vadodara, hair loss treatment vadodara, skin clinic vadodara",
-  authors: [{ name: "Tvachit Clinic" }],
+    "Tvachit Clinic is a dermatologist for acne treatment, hair fall treatment, pigmentation, laser hair removal, and skin care. In-clinic and remote consultations with Dr. Anisha Sharma.",
+  keywords: [
+    "dermatologist in vadodara",
+    "skin specialist vadodara",
+    "best dermatologist vadodara",
+    "acne treatment vadodara",
+    "hair fall treatment vadodara",
+    "pigmentation treatment vadodara",
+    "remote dermatology consultation",
+    "skin clinic tarsali",
+  ],
+  authors: [{ name: "Tvachit Clinic", url: siteConfig.url }],
   creator: "Tvachit Clinic",
   publisher: "Tvachit Clinic",
+  category: "health",
   formatDetection: {
     email: false,
     address: false,
     telephone: false,
   },
-  metadataBase: new URL("https://tvachit.com"),
+  metadataBase: new URL(siteConfig.url),
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
-    title: "Best Dermatologist in Vadodara | Skin & Hair Treatment Center",
+    title: "Best Dermatologist in Vadodara | Tvachit Skin & Hair Clinic",
     description:
-      "Expert dermatologist in Vadodara offering advanced skin care and hair loss treatments. Book consultation with the best skin specialist in Vadodara for personalized solutions.",
-    url: "https://tvachit.com",
-    siteName: "Tvachit Clinic - Dermatologist in Vadodara",
+      "Acne, hair fall, pigmentation, and skin treatments. In-clinic and remote consultations with Dr. Anisha Sharma at Tvachit Clinic.",
+    url: siteConfig.url,
+    siteName: "Tvachit Clinic",
     locale: "en_IN",
     type: "website",
     images: [
       {
-        url: "/og-image.jpg",
-        width: 1200,
-        height: 630,
-        alt: "Tvachit Clinic - Best Dermatologist in Vadodara",
+        url: ogImage.url,
+        secureUrl: ogImage.url,
+        width: ogImage.width,
+        height: ogImage.height,
+        type: ogImage.type,
+        alt: ogImage.alt,
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Best Dermatologist in Vadodara | Skin & Hair Treatment Center",
+    title: "Best Dermatologist in Vadodara | Tvachit Skin & Hair Clinic",
     description:
-      "Expert dermatologist in Vadodara offering advanced skin care and hair loss treatments. Book consultation with the best skin specialist in Vadodara for personalized solutions.",
-    images: ["/og-image.jpg"],
+      "Acne, hair fall, pigmentation, and skin treatments. In-clinic and remote consultations with Dr. Anisha Sharma.",
+    images: [
+      {
+        url: ogImage.url,
+        width: ogImage.width,
+        height: ogImage.height,
+        alt: ogImage.alt,
+      },
+    ],
   },
   robots: {
     index: true,
@@ -51,9 +87,6 @@ export const metadata: Metadata = {
       "max-image-preview": "large",
       "max-snippet": -1,
     },
-  },
-  alternates: {
-    canonical: "https://tvachit.com",
   },
   icons: {
     icon: "/favicon.ico",
@@ -68,52 +101,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <head>
-        <Script
-          id="structured-data"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "MedicalBusiness",
-              name: "Tvachit Clinic",
-              image: "https://tvachit.com/og-image.jpg",
-              description:
-                "Expert dermatologist in Vadodara offering advanced skin care and hair loss treatments.",
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "Vadodara",
-                addressRegion: "Gujarat",
-                addressCountry: "IN",
-              },
-              geo: {
-                "@type": "GeoCoordinates",
-                latitude: "22.256756958242985",
-                longitude: "73.20508805307608",
-              },
-              url: "https://tvachit.com",
-              telephone: "+916352717046",
-              priceRange: "₹300 - ₹1000",
-              openingHoursSpecification: {
-                "@type": "OpeningHoursSpecification",
-                dayOfWeek: [
-                  "Monday",
-                  "Tuesday",
-                  "Wednesday",
-                  "Thursday",
-                  "Friday",
-                  "Saturday",
-                ],
-                opens: "10:30",
-                closes: "13:00",
-              },
-              sameAs: ["YOUR_FACEBOOK_URL", "YOUR_INSTAGRAM_URL"],
-            }),
-          }}
-        />
-      </head>
-      <body>{children}</body>
+    <html lang="en-IN">
+      <body className={inter.className}>
+        <JsonLd data={getClinicJsonLd()} />
+        <div className="flex min-h-screen flex-col">
+          <SiteHeader />
+          {children}
+          <SiteFooter />
+        </div>
+      </body>
     </html>
   );
 }
