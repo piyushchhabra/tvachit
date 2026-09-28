@@ -4,29 +4,30 @@ import { blogPosts } from "@/lib/blog";
 import { siteConfig } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const lastModified = new Date();
+  const latestPost = blogPosts.reduce((latest, post) =>
+    post.dateModified > latest ? post.dateModified : latest
+  , blogPosts[0]?.dateModified ?? new Date().toISOString().slice(0, 10));
 
-  const staticPages: MetadataRoute.Sitemap = [
+  return [
     {
       url: siteConfig.url,
-      lastModified,
+      lastModified: new Date(latestPost),
       changeFrequency: "weekly",
       priority: 1,
+      images: [`${siteConfig.url}/og-image.jpg`],
     },
     {
       url: `${siteConfig.url}/blog`,
-      lastModified,
+      lastModified: new Date(latestPost),
       changeFrequency: "weekly",
       priority: 0.8,
     },
+    ...blogPosts.map((post) => ({
+      url: `${siteConfig.url}/blog/${post.slug}`,
+      lastModified: new Date(post.dateModified),
+      changeFrequency: "monthly" as const,
+      priority: 0.7,
+      images: [`${siteConfig.url}${post.image}`],
+    })),
   ];
-
-  const posts: MetadataRoute.Sitemap = blogPosts.map((post) => ({
-    url: `${siteConfig.url}/blog/${post.slug}`,
-    lastModified: new Date(post.dateModified),
-    changeFrequency: "monthly",
-    priority: 0.7,
-  }));
-
-  return [...staticPages, ...posts];
 }
